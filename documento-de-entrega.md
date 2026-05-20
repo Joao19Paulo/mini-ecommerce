@@ -1,9 +1,9 @@
 # Documento de Entrega
 
 ## a) Identificação
-- Nome do aluno: ______________________________
-- Turma: ______________________________________
-- Data: ___/___/2026
+- Nome do aluno: João Paulo Gonçalves Vellasco Campos
+- Turma: 5 perido Sistemas da Informação
+- Data: 18/05/2026
 
 ## b) Tecnologias utilizadas
 - Frontend: React 18 + Vite + React Router
@@ -29,7 +29,7 @@
   - `git push -u origin master`
 
 ## d) Link do repositório GitHub
-- https://github.com/seuusuario/mini-ecommerce
+- https://github.com/Joao19Paulo/mini-ecommerce
 
 ## e) Link do deploy funcionando
 - https://seu-projeto-no-servico-deploy.com
