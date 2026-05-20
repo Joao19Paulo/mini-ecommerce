@@ -36,6 +36,7 @@ function ProductModal({ product, categorias, onClose, onSaved }) {
     nome: product?.nome || '', descricao: product?.descricao || '',
     preco: product?.preco || '', estoque: product?.estoque ?? '',
     categoria_id: product?.categoria_id || '', imagem_url: product?.imagem_url || '',
+    imagem_base64: product?.imagem_base64 || '',
     tamanhos: product?.tamanhos || [], cores: product?.cores || [],
     ativo: product?.ativo !== false,
   });
@@ -43,6 +44,17 @@ function ProductModal({ product, categorias, onClose, onSaved }) {
   const [errors, setErrors] = useState({});
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleImageFile = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      set('imagem_base64', reader.result);
+      set('imagem_url', '');
+    };
+    reader.readAsDataURL(file);
+  };
 
   const validate = () => {
     const e = {};
@@ -58,7 +70,13 @@ function ProductModal({ product, categorias, onClose, onSaved }) {
     if (!validate()) return;
     setLoading(true);
     try {
-      const payload = { ...form, preco: parseFloat(form.preco), estoque: parseInt(form.estoque) };
+      const payload = {
+        ...form,
+        preco: parseFloat(form.preco),
+        estoque: parseInt(form.estoque),
+        imagem_url: form.imagem_base64 ? '' : form.imagem_url || '',
+        imagem_base64: form.imagem_base64 || '',
+      };
       // find categoria_nome
       const cat = categorias.find(c => c.id === form.categoria_id);
       if (cat) payload.categoria_nome = cat.nome;
@@ -113,12 +131,24 @@ function ProductModal({ product, categorias, onClose, onSaved }) {
             </div>
             <div className="form-group">
               <label className="form-label">URL da Imagem</label>
-              <input className="form-input" value={form.imagem_url} onChange={e => set('imagem_url', e.target.value)}
-                placeholder="https://..." />
+              <input className="form-input" value={form.imagem_url} onChange={e => {
+                set('imagem_url', e.target.value);
+                if (e.target.value) set('imagem_base64', '');
+              }} placeholder="https://..." />
               {form.imagem_url && (
                 <img src={form.imagem_url} alt="preview" onError={e => e.target.style.display='none'}
                   style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 4, marginTop: 6 }} />
               )}
+            </div>
+            <div className="form-group">
+              <label className="form-label">Upload de imagem</label>
+              <input type="file" accept="image/*" className="form-input" onChange={handleImageFile} />
+              {(form.imagem_base64 || form.imagem_url) && (
+                <img src={form.imagem_base64 || form.imagem_url} alt="preview" style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 4, marginTop: 6 }} />
+              )}
+              <p style={{ margin: '8px 0 0', color: 'var(--gray-500)', fontSize: 12 }}>
+                Envie uma imagem local ou use uma URL. A imagem local é armazenada em base64.
+              </p>
             </div>
             <div className="form-group">
               <label className="form-label">Tamanhos <span style={{fontSize:11,color:'var(--gray-400)',fontWeight:400,textTransform:'none'}}>— Enter para adicionar</span></label>
@@ -274,8 +304,8 @@ export default function AdminProdutos() {
                   <tr key={p.id}>
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        {p.imagem_url
-                          ? <img src={p.imagem_url} alt={p.nome} className="product-thumb" onError={e => e.target.style.display='none'} />
+                        {p.imagem_base64 || p.imagem_url
+                          ? <img src={p.imagem_base64 || p.imagem_url} alt={p.nome} className="product-thumb" onError={e => e.target.style.display='none'} />
                           : <div className="product-thumb-placeholder">👕</div>}
                         <div>
                           <div style={{ fontWeight: 600, fontSize: 14 }}>{p.nome}</div>

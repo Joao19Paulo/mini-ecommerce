@@ -39,7 +39,7 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
-  console.log(`📦 Banco de dados: SQLite`);
+  console.log(`📦 Banco de dados: NeDB (embedded)`);
   console.log(`🔑 Admin: admin@camisas.com / admin123`);
 });
 

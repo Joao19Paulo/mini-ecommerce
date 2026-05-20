@@ -48,7 +48,7 @@ router.get('/:id', async (req, res) => {
 // POST /api/produtos (admin)
 router.post('/', authenticate, requireAdmin, async (req, res) => {
   try {
-    const { nome, descricao, preco, estoque, categoria_id, categoria_nome, imagem_url, tamanhos, cores, ativo } = req.body;
+    const { nome, descricao, preco, estoque, categoria_id, categoria_nome, imagem_url, imagem_base64, tamanhos, cores, ativo } = req.body;
     if (!nome || preco === undefined) return res.status(400).json({ error: 'Nome e preço são obrigatórios' });
     const now = new Date().toISOString();
     let catNome = categoria_nome;
@@ -60,7 +60,8 @@ router.post('/', authenticate, requireAdmin, async (req, res) => {
       nome, descricao: descricao || '', preco: parseFloat(preco),
       estoque: parseInt(estoque) || 0, categoria_id: categoria_id || null,
       categoria_nome: catNome || '',
-      imagem_url: imagem_url || '', tamanhos: tamanhos || [], cores: cores || [],
+      imagem_url: imagem_url || '', imagem_base64: imagem_base64 || '',
+      tamanhos: tamanhos || [], cores: cores || [],
       ativo: ativo !== false, criado_em: now, atualizado_em: now
     });
     res.status(201).json(safe(doc));
@@ -72,7 +73,7 @@ router.put('/:id', authenticate, requireAdmin, async (req, res) => {
   try {
     const existing = await findOne(produtos, { _id: req.params.id });
     if (!existing) return res.status(404).json({ error: 'Produto não encontrado' });
-    const { nome, descricao, preco, estoque, categoria_id, categoria_nome, imagem_url, tamanhos, cores, ativo } = req.body;
+    const { nome, descricao, preco, estoque, categoria_id, categoria_nome, imagem_url, imagem_base64, tamanhos, cores, ativo } = req.body;
     let catNome = categoria_nome;
     if (categoria_id && !catNome) {
       const cat = await findOne(categorias, { _id: categoria_id });
@@ -81,7 +82,7 @@ router.put('/:id', authenticate, requireAdmin, async (req, res) => {
     await updateDoc(produtos, { _id: req.params.id }, {
       $set: { nome, descricao, preco: parseFloat(preco), estoque: parseInt(estoque),
         categoria_id: categoria_id || null, categoria_nome: catNome || '',
-        imagem_url: imagem_url || '', tamanhos: tamanhos || [], cores: cores || [],
+        imagem_url: imagem_url || '', imagem_base64: imagem_base64 || '', tamanhos: tamanhos || [], cores: cores || [],
         ativo: Boolean(ativo), atualizado_em: new Date().toISOString() }
     });
     const updated = await findOne(produtos, { _id: req.params.id });

@@ -5,8 +5,10 @@ import Layout from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Produtos from './pages/Produtos';
+import ProdutoDetalhe from './pages/ProdutoDetalhe';
 import AdminProdutos from './pages/AdminProdutos';
 import AdminUsuarios from './pages/AdminUsuarios';
+import AdminUsuarioDetalhe from './pages/AdminUsuarioDetalhe';
 
 function PrivateRoute({ children, adminOnly = false }) {
   const { user, isAdmin } = useAuth();
@@ -27,8 +29,10 @@ function AppRoutes() {
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       <Route path="/produtos" element={<PrivateRoute><Produtos /></PrivateRoute>} />
+      <Route path="/produtos/:id" element={<PrivateRoute><ProdutoDetalhe /></PrivateRoute>} />
       <Route path="/admin/produtos" element={<PrivateRoute adminOnly><AdminProdutos /></PrivateRoute>} />
       <Route path="/admin/usuarios" element={<PrivateRoute adminOnly><AdminUsuarios /></PrivateRoute>} />
+      <Route path="/admin/usuarios/:id" element={<PrivateRoute adminOnly><AdminUsuarioDetalhe /></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { produtosAPI } from '../services/api';
 
 const fmt = (v) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
@@ -68,48 +69,51 @@ export default function Produtos() {
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
-          {produtos.map(p => (
-            <div key={p.id} className="card" style={{ overflow: 'hidden', transition: 'transform 0.2s, box-shadow 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}>
-              <div style={{ position: 'relative', height: 260, overflow: 'hidden', background: 'var(--gray-100)' }}>
-                {p.imagem_url ? (
-                  <img src={p.imagem_url} alt={p.nome} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s' }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = ''} />
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 60 }}>👕</div>
-                )}
-                <div style={{ position: 'absolute', top: 10, left: 10 }}>
-                  <span className="badge badge-gray" style={{ backdropFilter: 'blur(4px)', background: 'rgba(255,255,255,0.9)' }}>
-                    {p.categoria_nome}
-                  </span>
-                </div>
-                {p.estoque <= 5 && p.estoque > 0 && (
-                  <div style={{ position: 'absolute', top: 10, right: 10 }}>
-                    <span className="badge badge-orange">Últimas peças</span>
+          {produtos.map(p => {
+            const imageSrc = p.imagem_base64 || p.imagem_url;
+            return (
+              <Link key={p.id} to={`/produtos/${p.id}`} className="card" style={{ overflow: 'hidden', transition: 'transform 0.2s, box-shadow 0.2s', textDecoration: 'none', color: 'inherit' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}>
+                <div style={{ position: 'relative', height: 260, overflow: 'hidden', background: 'var(--gray-100)' }}>
+                  {imageSrc ? (
+                    <img src={imageSrc} alt={p.nome} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s' }}
+                      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                      onMouseLeave={e => e.currentTarget.style.transform = ''} />
+                  ) : (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontSize: 60 }}>👕</div>
+                  )}
+                  <div style={{ position: 'absolute', top: 10, left: 10 }}>
+                    <span className="badge badge-gray" style={{ backdropFilter: 'blur(4px)', background: 'rgba(255,255,255,0.9)' }}>
+                      {p.categoria_nome}
+                    </span>
                   </div>
-                )}
-              </div>
-              <div style={{ padding: '16px' }}>
-                <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 15 }}>{p.nome}</div>
-                <div style={{ fontSize: 12, color: 'var(--gray-400)', marginBottom: 12, lineHeight: 1.4 }}>
-                  {p.descricao?.substring(0, 70)}{p.descricao?.length > 70 ? '...' : ''}
+                  {p.estoque <= 5 && p.estoque > 0 && (
+                    <div style={{ position: 'absolute', top: 10, right: 10 }}>
+                      <span className="badge badge-orange">Últimas peças</span>
+                    </div>
+                  )}
                 </div>
-                {p.tamanhos?.length > 0 && (
-                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 12 }}>
-                    {p.tamanhos.map(t => (
-                      <span key={t} style={{ fontSize: 11, padding: '2px 8px', border: '1px solid var(--gray-200)', borderRadius: 2, fontWeight: 600 }}>{t}</span>
-                    ))}
+                <div style={{ padding: '16px' }}>
+                  <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 15 }}>{p.nome}</div>
+                  <div style={{ fontSize: 12, color: 'var(--gray-400)', marginBottom: 12, lineHeight: 1.4 }}>
+                    {p.descricao?.substring(0, 70)}{p.descricao?.length > 70 ? '...' : ''}
                   </div>
-                )}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 24, color: 'var(--accent)' }}>{fmt(p.preco)}</span>
-                  <span style={{ fontSize: 12, color: 'var(--gray-400)' }}>Estoque: {p.estoque}</span>
+                  {p.tamanhos?.length > 0 && (
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 12 }}>
+                      {p.tamanhos.map(t => (
+                        <span key={t} style={{ fontSize: 11, padding: '2px 8px', border: '1px solid var(--gray-200)', borderRadius: 2, fontWeight: 600 }}>{t}</span>
+                      ))}
+                    </div>
+                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: 24, color: 'var(--accent)' }}>{fmt(p.preco)}</span>
+                    <span style={{ fontSize: 12, color: 'var(--gray-400)' }}>Estoque: {p.estoque}</span>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       )}
 

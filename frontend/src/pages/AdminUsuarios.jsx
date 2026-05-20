@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { usuariosAPI } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import { useAuth } from '../context/AuthContext';
@@ -231,7 +232,7 @@ export default function AdminUsuarios() {
                         }}>{u.nome?.[0]?.toUpperCase()}</div>
                         <div>
                           <div style={{ fontWeight: 600, fontSize: 14 }}>
-                            {u.nome}
+                            <Link to={`/admin/usuarios/${u.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>{u.nome}</Link>
                             {u.id === currentUser?.id && <span style={{ fontSize: 11, color: 'var(--gray-400)', marginLeft: 6 }}>(você)</span>}
                           </div>
                           <div className="font-mono" style={{ fontSize: 11, color: 'var(--gray-400)' }}>{u.id?.substring(0, 8)}...</div>
