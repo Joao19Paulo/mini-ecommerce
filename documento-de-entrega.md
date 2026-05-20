@@ -14,14 +14,13 @@
 - Deploy: (preencher com serviço usado)
 
 ## c) Evidências dos commits
-- Nota: este repositório local não possui pasta `.git` no momento, portanto não há histórico de commits disponível neste workspace.
-- Para gerar evidência de commits, instale o Git e execute:
-  - `git init`
-  - `git add .`
-  - `git commit -m "chore: iniciar projeto mini e-commerce"`
-  - `git commit -m "feat: implementar backend de produtos e usuários"`
-  - `git commit -m "feat: implementar frontend e integração com API"`
-- Capture uma tela do histórico de commits em seu cliente Git ou no GitHub e insira aqui.
+- Nota: o Git foi instalado e o repositório local foi inicializado neste projeto.
+- Histórico de commits criado localmente:
+  - `chore: inicializar projeto mini e-commerce`
+  - `feat(backend): implementar backend produtos e usuários`
+  - `feat(frontend): implementar frontend e integração com API`
+  - `chore: ajustes finais e README`
+- Para obter evidência visual, abra o histórico de commits no seu cliente Git ou no GitHub e insira um print aqui.
 
 ## d) Link do repositório GitHub
 - https://github.com/seuusuario/mini-ecommerce
