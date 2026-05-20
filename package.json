@@ -1,0 +1,16 @@
+{
+  "name": "mini-ecommerce",
+  "version": "1.0.0",
+  "description": "Mini E-commerce de Camisas — DRIP Store",
+  "scripts": {
+    "backend": "cd backend && node src/app.js",
+    "frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && NODE_ENV=production node src/app.js",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
