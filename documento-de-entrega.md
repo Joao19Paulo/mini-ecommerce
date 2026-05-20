@@ -29,7 +29,7 @@
 - https://github.com/Joao19Paulo/mini-ecommerce
 
 ## e) Link do deploy funcionando
-- Pendente: criação do serviço no Render bloqueada porque a conta exige informação de pagamento.
+- https://e9599c8a-6d65-4d9f-bc24-24ca6e44494d-00-184y9u7zo0kpy.riker.replit.dev
 
 ## Observações importantes
 - O projeto possui os requisitos principais implementados:
@@ -40,6 +40,5 @@
   - Autenticação e autorização de perfis
   - Busca, filtros e paginação
 - O backend está preparado para rodar em produção e servir o `frontend/dist` quando `NODE_ENV=production`.
-- Tentativa de deploy no Render feita via API com `type: web_service` e `serviceDetails`, mas o Render retornou:
-  - `402 Payment information is required to complete this request`
-- Para completar o deploy, adicione uma forma de pagamento ao workspace Render ou escolha outro serviço de hospedagem similar.
+- O deploy foi realizado com sucesso no Replit, sem necessidade de forma de pagamento.
+- O Render foi tentado anteriormente, mas a conta exigia informação de pagamento para criar o serviço.
