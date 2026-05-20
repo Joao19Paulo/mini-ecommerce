@@ -76,6 +76,20 @@ npm run dev
 
 ---
 
+## ☁️ Deploy
+
+O projeto já está preparado para deploy em provedores que suportam Node.js.
+
+Arquivos adicionados para deploy:
+- `Procfile` — comando padrão para `npm start`
+- `render.yaml` — configuração de serviço Render
+
+No ambiente de produção, o backend serve o frontend construído em `frontend/dist`.
+
+Para deploy em um serviço como Render ou Heroku, basta apontar o repositório e usar `npm install` seguido de `npm start`.
+
+---
+
 ## 🔑 Credenciais padrão
 
 | Perfil | Email | Senha |

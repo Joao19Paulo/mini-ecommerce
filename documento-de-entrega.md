@@ -11,7 +11,7 @@
 - Banco de dados: NeDB (embedded)
 - Autenticação: JWT + bcryptjs
 - Estilo: CSS customizado
-- Deploy: (preencher com serviço usado)
+- Deploy: Render / Railway / Heroku / outro serviço similar
 
 ## c) Evidências dos commits
 - Nota: o Git foi instalado e o repositório local foi inicializado neste projeto.
@@ -20,7 +20,13 @@
   - `feat(backend): implementar backend produtos e usuários`
   - `feat(frontend): implementar frontend e integração com API`
   - `chore: ajustes finais e README`
+  - `docs: atualizar documento de entrega com status Git`
 - Para obter evidência visual, abra o histórico de commits no seu cliente Git ou no GitHub e insira um print aqui.
+
+- O projeto está pronto para ser enviado a um repositório remoto.
+  Exemplo:
+  - `git remote add origin https://github.com/seuusuario/mini-ecommerce.git`
+  - `git push -u origin master`
 
 ## d) Link do repositório GitHub
 - https://github.com/seuusuario/mini-ecommerce
