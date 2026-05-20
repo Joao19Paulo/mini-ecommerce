@@ -2,7 +2,7 @@
 
 ## a) Identificação
 - Nome do aluno: João Paulo Gonçalves Vellasco Campos
-- Turma: 5 perido Sistemas da Informação
+- Turma: 5 periodo Sistemas da Informação
 - Data: 18/05/2026
 
 ## b) Tecnologias utilizadas
@@ -14,25 +14,22 @@
 - Deploy: Render / Railway / Heroku / outro serviço similar
 
 ## c) Evidências dos commits
-- Nota: o Git foi instalado e o repositório local foi inicializado neste projeto.
-- Histórico de commits criado localmente:
-  - `chore: inicializar projeto mini e-commerce`
-  - `feat(backend): implementar backend produtos e usuários`
-  - `feat(frontend): implementar frontend e integração com API`
-  - `chore: ajustes finais e README`
-  - `docs: atualizar documento de entrega com status Git`
-- Para obter evidência visual, abra o histórico de commits no seu cliente Git ou no GitHub e insira um print aqui.
-
-- O projeto está pronto para ser enviado a um repositório remoto.
-  Exemplo:
-  - `git remote add origin https://github.com/seuusuario/mini-ecommerce.git`
-  - `git push -u origin master`
+- Histórico de commits criado e sincronizado com o GitHub.
+- Commits recentes:
+  - `d552900` docs: adicionar link do repositório remoto
+  - `d5b57be` chore: adicionar configuração de deploy e atualizar documentação
+  - `f8e9352` docs: atualizar documento de entrega com status Git
+  - `db90220` chore: ajustes finais e README
+  - `9f80ae8` feat(frontend): implementar frontend e integração com API
+  - `f1a3f69` feat(backend): implementar backend produtos e usuários
+  - `e1c8518` chore: inicializar projeto mini e-commerce
+- Para obter evidência visual, abra o histórico de commits no GitHub e insira um print neste documento.
 
 ## d) Link do repositório GitHub
 - https://github.com/Joao19Paulo/mini-ecommerce
 
 ## e) Link do deploy funcionando
-- https://seu-projeto-no-servico-deploy.com
+- Pendente: criação do serviço no Render bloqueada porque a conta exige informação de pagamento.
 
 ## Observações importantes
 - O projeto possui os requisitos principais implementados:
@@ -42,4 +39,7 @@
   - Persistência em banco de dados
   - Autenticação e autorização de perfis
   - Busca, filtros e paginação
-- Este documento deve ser atualizado com os links reais e as evidências após a configuração do Git e do deploy.
+- O backend está preparado para rodar em produção e servir o `frontend/dist` quando `NODE_ENV=production`.
+- Tentativa de deploy no Render feita via API com `type: web_service` e `serviceDetails`, mas o Render retornou:
+  - `402 Payment information is required to complete this request`
+- Para completar o deploy, adicione uma forma de pagamento ao workspace Render ou escolha outro serviço de hospedagem similar.
